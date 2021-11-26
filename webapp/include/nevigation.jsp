@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="kr">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <title>SLiPP Java Web Programming</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link href="../css/styles.css" rel="stylesheet">
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <nav class="navbar navbar-fixed-top header">
     <div class="col-md-12">
         <div class="navbar-header">
@@ -39,7 +28,7 @@
                         <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
                     </ul>
                 </li>
-                <li><a href="../user/list.html"><i class="glyphicon glyphicon-user"></i></a></li>
+                <li><a href="/user/list"><i class="glyphicon glyphicon-user"></i></a></li>
             </ul>
         </div>
     </div>
@@ -49,7 +38,7 @@
         <div class="navbar-header">
             <a href="#" style="margin-left:15px;" class="navbar-btn btn btn-default btn-plus dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-home" style="color:#dd1111;"></i> Home <small><i class="glyphicon glyphicon-chevron-down"></i></small></a>
             <ul class="nav dropdown-menu">
-                <li><a href="../user/profile.html"><i class="glyphicon glyphicon-user" style="color:#1111dd;"></i> Profile</a></li>
+                <li><a href="../user/profile.jsp"><i class="glyphicon glyphicon-user" style="color:#1111dd;"></i> Profile</a></li>
                 <li class="nav-divider"></li>
                 <li><a href="#"><i class="glyphicon glyphicon-cog" style="color:#dd1111;"></i> Settings</a></li>
             </ul>
@@ -57,41 +46,17 @@
         <div class="collapse navbar-collapse" id="navbar-collapse2">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="/">Posts</a></li>
-                <li><a href="../user/login.html" role="button">로그인</a></li>
-                <li><a href="../user/form.html" role="button">회원가입</a></li>
-                <li><a href="#" role="button">로그아웃</a></li>
-                <li><a href="#" role="button">개인정보수정</a></li>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user}">
+                        <li><a href="#" role="button">로그아웃</a></li>
+                        <li><a href="#" role="button">개인정보수정</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="/user/loginForm" role="button">로그인</a></li>
+                        <li><a href="/user/createForm" role="button">회원가입</a></li>
+                    </c:otherwise>
+                </c:choose>
             </ul>
         </div>
     </div>
 </div>
-
-<div class="container" id="main">
-   <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
-      <div class="panel panel-default content-main">
-          <form name="question" method="post" action="">
-              <div class="form-group">
-                  <label for="writer">글쓴이</label>
-                  <input class="form-control" id="writer" name="writer" placeholder="글쓴이"/>
-              </div>
-              <div class="form-group">
-                  <label for="title">제목</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="제목"/>
-              </div>
-              <div class="form-group">
-                  <label for="contents">내용</label>
-                  <textarea name="contents" id="contents" rows="5" class="form-control"></textarea>
-              </div>
-              <button type="submit" class="btn btn-success clearfix pull-right">질문하기</button>
-              <div class="clearfix" />
-          </form>
-        </div>
-    </div>
-</div>
-
-<!-- script references -->
-<script src="../js/jquery-2.2.0.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/scripts.js"></script>
-	</body>
-</html>
